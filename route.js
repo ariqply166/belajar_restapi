@@ -10,5 +10,7 @@ module.exports = function(app){
     .get(json.datamahasiswa);
 
     app.route('/tampil/:id').get(json.datamahasiswaById);
-    app.route('/tambah').post(json.addMahasiswa);
+    app.route('/insertdata').post(json.addMahasiswa);
+    app.route('/updatedata').put(json.updateMahasiswa);
+    app.route('/deletedata').put(json.deleteMahasiswa);
 };

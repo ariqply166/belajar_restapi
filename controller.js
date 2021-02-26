@@ -33,17 +33,45 @@ exports.datamahasiswaById = function (req, res) {
 
 // input data
 exports.addMahasiswa = function (req, res) {
-    const {nama,nim,jurusan} = req.body;
+    const { nama, nim, jurusan } = req.body;
     // var nim = req.body.nim;
     // var nama = req.body.nama;
     // var jurusan = req.body.jurusan;
 
     koneksi.query(`INSERT INTO mahasiswa (nim,nama,jurusan) VALUES ('${nim}','${nama}','${jurusan}')`,
-        function (err, rows, field){
-            if(err){
+        function (err, rows, field) {
+            if (err) {
                 console.log(err);
-            }else{
-                response.ok("Input Masuk !",res)
+            } else {
+                response.ok("Input Masuk !", res)
+            }
+        });
+}
+
+
+//update data
+exports.updateMahasiswa = function (req, res) {
+    const { id, nama, nim, jurusan } = req.body;
+    koneksi.query(`UPDATE mahasiswa SET nim=${nim},nama='${nama}',jurusan='${jurusan}' WHERE id =${id}`,
+        function (err, rows, field) {
+            if (err) {
+                console.log(err);
+            } else {
+                response.ok("Update berhasil !", res)
+            }
+        });
+}
+
+
+//delete data
+exports.deleteMahasiswa = function(req, res){
+    let id = req.body.id;
+    koneksi.query(`DELETE FROM mahasiswa WHERE id=${id}`,
+        function (err, rows, field) {
+            if (err) {
+                console.log(err);
+            } else {
+                response.ok("Delete berhasil !", res)
             }
         });
 }
